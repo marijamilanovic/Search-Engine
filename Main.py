@@ -2,8 +2,6 @@
 from Parsiranje import *
 from time import time
 
-
-
 if __name__ == "__main__":
     running = True
     userInput = None

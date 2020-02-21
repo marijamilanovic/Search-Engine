@@ -7,14 +7,13 @@ class TrieNode(object):
         self.leaf = False                                       # da l je poslednji
         self.counter = 1
 
-
 def add(root, word=str):
     node = root
     for char in word:
         found_child = False
         for child in node.children:                             # trazi karakter u trenutnom cvoru
             if child.char == char:                              # ako smo nasli
-                child.counter += 1                              # povecaj brojac
+                child.counter += 1
                 node = child                                    # vezi cvor i dete
                 found_child = True
                 break
@@ -23,6 +22,7 @@ def add(root, word=str):
             node.children.append(new_node)
             node = new_node                                     # vezi cvor i dete
     node.leaf = True                                            # kraj reci - list
+
 
 
 def searching(root, search=str):
@@ -37,8 +37,12 @@ def searching(root, search=str):
                 node = child
                 break
         if char_not_found:                                      # ako nismo nasli
-            return False, 0
-    return True, node.counter                                   # nasli prefiks znaci vrati TRUE i brojac poklapanja
+                return False, 0
+        if node.leaf == False:
+            node.counter = 0
+    return node.leaf, node.counter                              # nasli prefiks znaci vrati TRUE i brojac poklapanja
+
+
 
 
 if __name__ == "__main__":
@@ -46,10 +50,12 @@ if __name__ == "__main__":
     add(root, 'masalaa')
     add(root, 'mas')
     add(root, 'tttt')
+    add(root, 'tttt')
 
-    print(searching(root, 'ma'))
+    print(searching(root, 'mas'))                              # ISPRAVITI - ispisuje da postoje dve reci!
     print(searching(root, 'masalaaaa'))
     print(searching(root, 'maa'))
-    print(searching(root, 'masal'))
+    print(searching(root, 'masalaa'))
     print(searching(root, 'tata'))
     print(searching(root, 'tttt'))
+    print(searching(root, 'masalaa'))

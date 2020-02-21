@@ -1,6 +1,7 @@
 
 from Parsiranje import *
 from time import time
+from Pretraga import *
 
 if __name__ == "__main__":
     running = True
@@ -13,7 +14,8 @@ if __name__ == "__main__":
         print("0 - Kraj")
         print("1 - Parsiranje HTML fajlova iz test skupa")
         print("2 - Parsiranje zadatih HTML fajlova")
-        print("3 - ")
+        print("3 - Unos 1 upita - prikaz lokacije i broj ponavljanja")
+        print("4 - Unos vise upita - prikaz lokacije i broja ponavjanja")
 
         userInput = input("Izaberi broj opcije ->   ")
 
@@ -33,6 +35,15 @@ if __name__ == "__main__":
             endTime = time()
             timee = endTime - startTime
             print("Vreme parsiranja fajlova: " + str(timee) + " sekudni.")
+
+
+        if userInput == "3":
+            inDir = str(input("Puna lokacija foldera ->  "))
+            inQ = str(input("Unesi rec ->  "))
+            standardQuery(inDir, inQ)
+
+
+
 
         if userInput == "0":
                 running = False

@@ -2,11 +2,11 @@ from Parser import  *
 import os
 from Trie import TrieNode, add, searching
 
-def parsiraj():                                                 # mozda napraviti globalno parsiranje u main-u ?
+def parsiraj():
     root_dir = 'C:\\Users\\MASHA\\Desktop\\FAKS\\OISiSI\\MojDrugiProjekatMasha\\Projekat2\\test-skup\\python-2.7.7-docs-html'
     parser = Parser()
     dictionary = {}                                                                 # KLJUC = linkovi, VREDNOST = trie svih reci
-    root = TrieNode('')                                         # DA LI TRIE ZA SVE ILI ZA SVAKI LINK POSEBNO?
+    root = TrieNode(root_dir)                                         # DA LI TRIE ZA SVE ILI ZA SVAKI LINK POSEBNO?
     for dir_path, dir_names, files in os.walk(root_dir):                            # "walking the tree"
         for file in files:
             if file.endswith(".html"):
@@ -18,16 +18,17 @@ def parsiraj():                                                 # mozda napravit
                     add(root, rec.lower())
                 dictionary[path] = root
                 print(dictionary[path])
-
+    return root
 
 
 def parsirajZadato(root_dir = str):
     parser = Parser()
     dictionary = {}
+    root = TrieNode('')
     for dir_path, dir_names, files in os.walk(root_dir):
         for file in files:
             if file.endswith(".html"):
-                root = TrieNode('')
+                #root = TrieNode('')
                 path = os.path.abspath(dir_path + os.sep + file).lower()
                 words = parser.parse(path)[1]
                 links = parser.parse(path)[0]
@@ -37,27 +38,37 @@ def parsirajZadato(root_dir = str):
                 print(dictionary[path])
 
 
-def parsirajQ(root_dir, inWord):
+def parsirajQ(root_dir, inWord):                                    # IZMENITI - MOZDA UNUTAR TRIE DA PRETRAZUJE
     parser = Parser()
     counter = 0
     br = 0
-    #root = TrieNode('')
+    recnik={}
+    dictionary = {}
+    root = TrieNode('')
     for dir_path, dir_names, files in os.walk(root_dir):
         for file in files:
             if file.endswith(".html"):
-                root = TrieNode('')
+                #root = TrieNode('')
                 path = os.path.abspath(dir_path + os.sep + file).lower()
                 words = parser.parse(path)[1]
-                pri = ispisNazivaFajla(path)                        # DA LI TREBA LINK ILI NAZIV FAJLA?
+                pri = ispisNazivaFajla(path)
                 print(pri)
                 br = 0
+                for rec in words:
+                    add(root, rec.lower())
+                dictionary[path] = root
+                print(dictionary[path])
                 for rec in words:
                     if rec.lower() == inWord.lower():
                         counter += 1
                         br += 1
-                print(" --->  " + str(br))
+                recnik[path] = br
+                print(" --->  " + str(recnik[path]))
                 print("")
     print("BROJ PONAVLJANJA:  " + str(counter))
+    if(counter == 0):
+        print("Data rec ne postoji!")
+    return recnik
 
 
 

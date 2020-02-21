@@ -5,15 +5,16 @@ class TrieNode(object):
         self.char = char
         self.children = []                                      # lista reci
         self.leaf = False                                       # da l je poslednji
-        self.counter = 1
+        self.counter = 0
 
 def add(root, word=str):
     node = root
+    wlen = len(word)
     for char in word:
+        wlen -= 1
         found_child = False
         for child in node.children:                             # trazi karakter u trenutnom cvoru
             if child.char == char:                              # ako smo nasli
-                child.counter += 1
                 node = child                                    # vezi cvor i dete
                 found_child = True
                 break
@@ -21,7 +22,8 @@ def add(root, word=str):
             new_node = TrieNode(char)
             node.children.append(new_node)
             node = new_node                                     # vezi cvor i dete
-    node.leaf = True                                            # kraj reci - list
+    node.leaf = True                                           # kraj reci - list
+    node.counter += 1
 
 
 
@@ -48,14 +50,19 @@ def searching(root, search=str):
 if __name__ == "__main__":
     root = TrieNode('*')
     add(root, 'masalaa')
+    add(root, 'madalaa')
     add(root, 'mas')
+    add(root, 'madm')
     add(root, 'tttt')
     add(root, 'tttt')
+    add(root, 'č')
 
-    print(searching(root, 'mas'))                              # ISPRAVITI - ispisuje da postoje dve reci!
+    print(searching(root, 'mas'))
+    print(searching(root, 'č'))
     print(searching(root, 'masalaaaa'))
     print(searching(root, 'maa'))
     print(searching(root, 'masalaa'))
     print(searching(root, 'tata'))
     print(searching(root, 'tttt'))
+    print(searching(root, 'žžž'))
     print(searching(root, 'masalaa'))

@@ -1,7 +1,5 @@
-
-from Parsiranje import *
 from time import time
-from Pretraga import *
+from scripts.Pretraga import *
 
 
 

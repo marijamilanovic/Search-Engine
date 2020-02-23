@@ -6,8 +6,9 @@ class TrieNode(object):
         self.children = []                                      # lista reci
         self.leaf = False                                       # da l je poslednji
         self.counter = 0
+        self.recnik = {}
 
-def add(root, word=str):
+def add(root, word=str, htmlStr=str):
     node = root
     wlen = len(word)
     for char in word:
@@ -22,8 +23,13 @@ def add(root, word=str):
             new_node = TrieNode(char)
             node.children.append(new_node)
             node = new_node                                     # vezi cvor i dete
-    node.leaf = True                                           # kraj reci - list
+    node.leaf = True                                            # kraj reci - list
+    if (htmlStr in node.recnik.keys()):
+        node.recnik[htmlStr] += 1
+    else:
+        node.recnik[htmlStr] = 1
     node.counter += 1
+    return node.counter
 
 
 
@@ -42,7 +48,7 @@ def searching(root, search=str):
                 return False, 0
         if node.leaf == False:
             node.counter = 0
-    return node.leaf, node.counter                              # nasli prefiks znaci vrati TRUE i brojac poklapanja
+    return node.leaf, node.counter, node.recnik                 # nasli prefiks znaci vrati TRUE, brojac poklapanja
 
 
 

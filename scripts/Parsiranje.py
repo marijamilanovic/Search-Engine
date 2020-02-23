@@ -16,11 +16,11 @@ def parsiraj():
                     #root = TrieNode('')
                     path = os.path.abspath(dir_path + os.sep + file).lower()            # path.abspath -> Return a normalized absolutized version of the pathname path
                     words = parser.parse(path)[1]                                       # os.sep -> The character used by the operating system to separate pathname components
-                    links = parser.parse(path)[0]                                       # MILICE TREBA TI ZA GRAF
+                    #links = parser.parse(path)[0]                                       # MILICE TREBA TI ZA GRAF
                     pri = ispisNazivaFajla(path)
                     print(pri)
                     for rec in words:
-                        add(root, rec.lower())
+                        add(root, rec.lower(), path)
                     dictionary[path] = root
                     #print(dictionary[path])
         print("")
@@ -93,12 +93,12 @@ def parsirajQ(root_dir, inWord):                                # radi, ali bolj
 def newDictionary(inWord, dictionary):                              # KLJUC - putanja, VREDNOST - trie
     newDict = {}
     current = 0
+    brStr = 0
     for key, value in dictionary.items():
         #print("kljuc  " + str(key))
         #print("vrednost  " + str(value))
         if int(searching(value, inWord)[1]) != 0:
-            current = searching(value, inWord)[1]
-            newDict[key] = current                               # KLJUC - putanja, VREDNOST - broj ponavljanja
+            root, current, newDict = searching(value, inWord)               # KLJUC - putanja, VREDNOST - broj ponavljanja
     print("BROJ PONAVLJANJA --> " + str(current))
     if (current == 0):
         print("Data rec ne postoji!")

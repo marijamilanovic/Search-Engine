@@ -15,8 +15,8 @@ if __name__ == "__main__":
         print("0 - Kraj")
         print("1 - Parsiranje HTML fajlova iz test skupa")
         print("2 - Parsiranje zadatih HTML fajlova")
-        print("3 - Unos 1/vise upita")                                      # nije gotovo
-        print("4 - Unos logickih upita")                                    # nije gotovo
+        print("3 - Unos 1/vise upita")
+        print("4 - Unos logickih upita")
 
         userInput = input("Izaberi broj opcije ->   ")
 

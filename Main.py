@@ -22,9 +22,9 @@ if __name__ == "__main__":
         print("MENU:")
         print("0 - Kraj")
         print("1 - Promena direktorijuma")
-        print("2 - ")
-        print("3 - Unos 1/vise upita")
-        print("4 - Unos logickih upita")
+        print("2 - Unos 1/vise upita")
+        print("3 - Unos logickih upita")
+        print("4 - Rangirana pretraga")
 
         userInput = input("Izaberi broj opcije ->  ")
 
@@ -41,7 +41,7 @@ if __name__ == "__main__":
         elif userInput == "2":
             print("ovo nne treba")
 
-        elif userInput == "3":
+        elif userInput == "2":
             if (dictionary == None):
                 print("Prvo morate PARSIRATI, pritisnite broj 1  ili 2 !!!")
             else:
@@ -49,14 +49,14 @@ if __name__ == "__main__":
                 standardQuery(dictionary, inSQ)
 
 
-        elif userInput == "4":
+        elif userInput == "3":
             if (dictionary == None):
                 print("Prvo morate PARSIRATI, pritisnite broj 1  ili 2 !!!")
             else:
                 inLQ = str(input("Unesi rec ->  "))
                 logicalQuery(dictionary, inLQ)
 
-        elif userInput == "5":
+        elif userInput == "4":
             pass
 
 

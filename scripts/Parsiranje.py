@@ -3,7 +3,7 @@ import os
 
 from modules.Parser import  *
 from structs.Trie import TrieNode, add, searching
-from structs.graf import Graf, Cvor
+from structs.graf import Graf
 
 
 def get_html_fajlove(putanja):
@@ -18,57 +18,71 @@ def get_html_fajlove(putanja):
             lista_fajlova = lista_fajlova + get_html_fajlove(file_putanja)
     return lista_fajlova
 
+
 def parsiraj_html(putanja):
-    lista_linkova = []
-    lista_reci = []
-    #trie = TrieNode()
     dictionary = {}
     graf = Graf()
     parser = Parser()
     root = TrieNode(putanja)
     html_putanja = get_html_fajlove(putanja)
+    lista_veza = list()
     print("Trenutno se HTML fajlovi parsiraju...")
-    for fajl in html_putanja:
-        file_absolute_putanja = f"{os.path.abspath(os.path.dirname(putanja))}/{fajl}"
-        linkovi, reci = parser.parse(fajl)
+    start_time = time.time()
+    for html in html_putanja:
+        linkovi, reci = parser.parse(html)
         #add(root, reci)
         for rec in reci:
-            add(root, rec.lower(), file_absolute_putanja)
-        dictionary[file_absolute_putanja] = root
-        c = Cvor(file_absolute_putanja)
-        c.set_linkove(linkovi)
-        graf.napravi_cvorove(c)
-    #graf.print_graf()
+            add(root, rec.lower(), html)
+        dictionary[html] = root
+
+        for link in linkovi:
+            lista_veza.append((html, link))
+
+    all_vertex = set()
+    for e in lista_veza:
+        all_vertex.add(e[0])
+        all_vertex.add(e[1])
+
+    for v in all_vertex:
+        graf.insert_vertex(v)
+
+    for e in lista_veza:
+        src = e[0]
+        dest = e[1]
+
+        graf.insert_edge(src, dest)
+
+    print("\n\nUcitavanje u graph i trie za: %s seconds." % (time.time() - start_time))
+
     return dictionary, graf
 
-def parsiraj_html_auto():
-    putanja = 'C:\\Users\\MASHA\\Desktop\\FAKS\\OISiSI\\MojDrugiProjekatMasha\\Projekat2\\test-skup\\python-2.7.7-docs-html'
-    if (os.path.exists(putanja)):
-        lista_linkova = []
-        lista_reci = []
-        #trie = TrieNode()
-        dictionary = {}
-        graf = Graf()
-        parser = Parser()
-        root = TrieNode(putanja)
-        html_putanja = get_html_fajlove(putanja)
-        print("Trenutno se HTML fajlovi parsiraju...")
-        for fajl in html_putanja:
-            file_absolute_putanja = f"{os.path.abspath(os.path.dirname(putanja))}/{fajl}"
-            linkovi, reci = parser.parse(fajl)
-            #add(root, reci)
-            for rec in reci:
-                add(root, rec.lower(), file_absolute_putanja)
-            dictionary[file_absolute_putanja] = root
-            c = Cvor(file_absolute_putanja)
-            c.set_linkove(linkovi)
-            graf.napravi_cvorove(c)
-            #graf.print_graf()
-    else:
-        print("Dati link direktorijuma nije validan...")
-        return  None
-    return dictionary, graf
 
+# def parsiraj_html_auto(putanja):
+#     if (os.path.exists(putanja)):
+#         #trie = TrieNode()
+#         dictionary = {}
+#         graf = Graf()
+#         parser = Parser()
+#         root = TrieNode(putanja)
+#         html_putanja = get_html_fajlove(putanja)
+#         print("Trenutno se HTML fajlovi parsiraju...")
+#
+#         for fajl in html_putanja:
+#             file_absolute_putanja = f"{os.path.abspath(os.path.dirname(putanja))}/{fajl}"
+#             linkovi, reci = parser.parse(fajl)
+#             #add(root, reci)
+#             for rec in reci:
+#                 add(root, rec.lower(), file_absolute_putanja)
+#             dictionary[file_absolute_putanja] = root
+#             c = Cvor(file_absolute_putanja)
+#             c.set_linkove(linkovi)
+#             graf.napravi_cvorove(c)
+#             #graf.print_graf()
+#     else:
+#         print("Dati link direktorijuma nije validan...")
+#         return  None
+#     return dictionary, graf
+#
 
 #def parsiraj():
 #    root_dir = 'C:\\Users\\MASHA\\Desktop\\FAKS\\OISiSI\\MojDrugiProjekatMasha\\Projekat2\\test-skup\\python-2.7.7-docs-html'

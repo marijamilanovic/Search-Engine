@@ -3,6 +3,7 @@ from structs.set import *
 
 logicalOperators = ["and", "or", "not"]
 
+
 def standardQuery(inDir, inWord):
     if(len(inWord) > 0):
         sub_str = inWord.split(" ")

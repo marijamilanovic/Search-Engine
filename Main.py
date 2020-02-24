@@ -9,25 +9,35 @@ if __name__ == "__main__":
     dictionary = None
     graf = None
 
+    os.chdir("test-skup")
+    os.chdir("python-2.7.7-docs-html")
+    # os.chdir("whatsnew")
+    path = os.path.abspath("")
+    print("Pocetna putanja je : {}".format(path))
+    dictionary, graf = parsiraj_html(path)
+
     while running:
         print("")
         print("-----------------------")
         print("MENU:")
         print("0 - Kraj")
-        print("1 - Parsiranje HTML fajlova (ugradjen direktorijum)")
+        print("1 - Promena direktorijuma")
         print("2 - Parsiranje zadatih HTML fajlova")
         print("3 - Unos 1/vise upita")
         print("4 - Unos logickih upita")
 
-        userInput = input("Izaberi broj opcije ->   ")
+        userInput = input("Izaberi broj opcije ->  ")
 
         if userInput == "1":
-            startTime = time.time()
-            dictionary, graf = parsiraj_html_auto()
-            endTime = time.time()
-            timee = endTime - startTime
-            print("Vreme parsiranja fajlova: " + str(timee) + " sekudni.")
+            putanja = input("Unesite direktorijum za parsiranje:")
+            if os.path.exists(putanja):
+                print("Uspesno promenjena putanja!")
+                path = putanja
+                dictionary, graf = parsiraj_html(path)
 
+                print("Trenutna putanja je : {}".format(path))
+            else:
+                print("Putanja ne postoji!")
         elif userInput == "2":
             print("pr. C:\\Users\\MASHA\\test\\py-html")
             print("Unesite direktorijum za parsiranje/indeksiranje:")

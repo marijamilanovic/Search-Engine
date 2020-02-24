@@ -8,7 +8,7 @@ class TrieNode(object):
         self.counter = 0
         self.recnik = {}
 
-def add(root, word=str, htmlStr=str):
+def add(root, word, htmlStr):
     node = root
     wlen = len(word)
     for char in word:
@@ -33,7 +33,7 @@ def add(root, word=str, htmlStr=str):
 
 
 
-def searching(root, search=str):
+def searching(root, search):
     node = root
     if not root.children:                                       # ako root nema dece -> false
         return False, 0

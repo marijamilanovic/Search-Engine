@@ -7,13 +7,14 @@ if __name__ == "__main__":
     running = True
     userInput = None
     dictionary = None
+    graf = None
 
     while running:
         print("")
         print("-----------------------")
         print("MENU:")
         print("0 - Kraj")
-        print("1 - Parsiranje HTML fajlova iz test skupa")
+        print("1 - Parsiranje HTML fajlova (ugradjen direktorijum)")
         print("2 - Parsiranje zadatih HTML fajlova")
         print("3 - Unos 1/vise upita")
         print("4 - Unos logickih upita")
@@ -21,24 +22,24 @@ if __name__ == "__main__":
         userInput = input("Izaberi broj opcije ->   ")
 
         if userInput == "1":
-            pocetak = time.time()
-            print("Unesite direktorijum za parsiranje/indeksiranje:")
-            putanja = input()
-            parsiraj_html(putanja)
-            ttime = time.time()-pocetak
-            print("Vreme: " + str(ttime) + " sekundi.")
+            startTime = time.time()
+            dictionary, graf = parsiraj_html_auto()
+            endTime = time.time()
+            timee = endTime - startTime
+            print("Vreme parsiranja fajlova: " + str(timee) + " sekudni.")
 
         elif userInput == "2":
             print("pr. C:\\Users\\MASHA\\test\\py-html")
-            myInput = str(input("Puna lokacija foldera ->  "))
-            if(os.path.exists(myInput)):
-                startTime = time()
-                #dictionary = parsirajZadato(myInput)
-                endTime = time()
-                timee = endTime - startTime
-                print("Vreme parsiranja fajlova: " + str(timee) + " sekudni.")
+            print("Unesite direktorijum za parsiranje/indeksiranje:")
+            putanja = input()
+            if(os.path.exists(putanja)):
+                pocetak = time.time()
+                dictionary, graf = parsiraj_html(putanja)
+                ttime = time.time() - pocetak
+                print("Vreme parsiranja fajlova: " + str(ttime) + " sekudni.")
             else:
-                print("Dati link ka folderu nije validan...")
+                print("Dati link direktorijuma nije validan...")
+            
 
 
         elif userInput == "3":

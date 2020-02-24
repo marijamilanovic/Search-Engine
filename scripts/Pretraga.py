@@ -1,9 +1,6 @@
 from scripts.Parsiranje import *
 from structs.set import *
 
-from Projekat2.scripts.Parsiranje import ispisNazivaFajla
-from Projekat2.structs.set import Set
-
 logicalOperators = ["and", "or", "not"]
 
 def standardQuery(inDir, inWord):

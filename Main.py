@@ -1,6 +1,6 @@
 from time import time
 from scripts.Pretraga import *
-
+from scripts.Parsiranje import *
 
 
 if __name__ == "__main__":
@@ -21,19 +21,19 @@ if __name__ == "__main__":
         userInput = input("Izaberi broj opcije ->   ")
 
         if userInput == "1":
-            start_time = time()
-            dictionary = parsiraj()
-            end_time = time()
-            ttime = end_time - start_time
-            print("Vreme parsiranja fajlova: " + str(ttime) + " sekudni.")
+            pocetak = time.time()
+            print("Unesite direktorijum za parsiranje/indeksiranje:")
+            putanja = input()
+            parsiraj_html(putanja)
+            ttime = time.time()-pocetak
+            print("Vreme: " + str(ttime) + " sekundi.")
 
-
-        if userInput == "2":
+        elif userInput == "2":
             print("pr. C:\\Users\\MASHA\\test\\py-html")
             myInput = str(input("Puna lokacija foldera ->  "))
             if(os.path.exists(myInput)):
                 startTime = time()
-                dictionary = parsirajZadato(myInput)
+                #dictionary = parsirajZadato(myInput)
                 endTime = time()
                 timee = endTime - startTime
                 print("Vreme parsiranja fajlova: " + str(timee) + " sekudni.")
@@ -41,7 +41,7 @@ if __name__ == "__main__":
                 print("Dati link ka folderu nije validan...")
 
 
-        if userInput == "3":
+        elif userInput == "3":
             if (dictionary == None):
                 print("Prvo morate PARSIRATI, pritisnite broj 1  ili 2 !!!")
             else:
@@ -49,15 +49,18 @@ if __name__ == "__main__":
                 standardQuery(dictionary, inSQ)
 
 
-        if userInput == "4":
+        elif userInput == "4":
             if (dictionary == None):
                 print("Prvo morate PARSIRATI, pritisnite broj 1  ili 2 !!!")
             else:
                 inLQ = str(input("Unesi rec ->  "))
                 logicalQuery(dictionary, inLQ)
 
+        elif userInput == "5":
+            pass
 
-        if userInput == "0":
+
+        elif userInput == "0":
                 running = False
 
 

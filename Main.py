@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     os.chdir("test-skup")
     os.chdir("python-2.7.7-docs-html")
-    os.chdir("whatsnew")
+    #os.chdir("whatsnew")
     path = os.path.abspath("")
     print("Pocetna putanja je : {}".format(path))
     dictionary, graf = parsiraj_html(path)
@@ -29,17 +29,15 @@ if __name__ == "__main__":
         userInput = input("Izaberi broj opcije ->  ")
 
         if userInput == "1":
-            putanja = input("Unesite direktorijum za parsiranje:")
+            putanja = input("Unesite direktorijum za parsiranje:  ")
             if os.path.exists(putanja):
-                print("Uspesno promenjena putanja!")
                 path = putanja
                 dictionary, graf = parsiraj_html(path)
-
+                print("Uspesno promenjena putanja!")
                 print("Trenutna putanja je : {}".format(path))
             else:
                 print("Putanja ne postoji!")
-        elif userInput == "2":
-            print("ovo nne treba")
+
 
         elif userInput == "2":
             if (dictionary == None):
@@ -56,8 +54,6 @@ if __name__ == "__main__":
                 inLQ = str(input("Unesi rec ->  "))
                 logicalQuery(dictionary, inLQ)
 
-        elif userInput == "4":
-            pass
 
 
         elif userInput == "0":

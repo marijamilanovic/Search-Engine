@@ -2,7 +2,7 @@ import time
 import os
 
 from modules.Parser import  *
-from structs.Trie import TrieNode, add, searching
+from structs.Trie import *
 from structs.graf import Graf
 
 
@@ -55,6 +55,31 @@ def parsiraj_html(putanja):
     print("\n\nUcitavanje u graph i trie za: %s seconds." % (time.time() - start_time))
 
     return dictionary, graf
+
+
+
+def newDictionary(inWord, dictionary):                                      # KLJUC - putanja, VREDNOST - trie
+    newDict = {}
+    current = 0
+    brStr = 0
+    root = None
+    for key, value in dictionary.items():
+        #print("kljuc  " + str(key))
+        #print("vrednost  " + str(value))
+        if int(searching(value, inWord)[1]) != 0:
+            root, current, newDict = searching(value, inWord)               # KLJUC - putanja, VREDNOST - broj ponavljanja
+    print("BROJ PONAVLJANJA --> " + str(current))
+    if (current == 0):
+        print("Data rec ne postoji!")
+    return  newDict, current
+
+
+def ispisNazivaFajla(file):
+     a = file.split("\\")
+     return a[-1][:-5]
+
+
+
 
 
 # def parsiraj_html_auto(putanja):
@@ -171,24 +196,5 @@ def parsiraj_html(putanja):
 #
 
 
-def newDictionary(inWord, dictionary):                              # KLJUC - putanja, VREDNOST - trie
-    newDict = {}
-    current = 0
-    brStr = 0
-    root = None
-    for key, value in dictionary.items():
-        #print("kljuc  " + str(key))
-        #print("vrednost  " + str(value))
-        if int(searching(value, inWord)[1]) != 0:
-            root, current, newDict = searching(value, inWord)               # KLJUC - putanja, VREDNOST - broj ponavljanja
-    print("BROJ PONAVLJANJA --> " + str(current))
-    if (current == 0):
-        print("Data rec ne postoji!")
-    return  newDict, current
 
-
-
-def ispisNazivaFajla(file):
-     a = file.split("\\")
-     return a[-1][:-5]
 

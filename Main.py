@@ -12,7 +12,7 @@ if __name__ == "__main__":
     graf = None
 
     os.chdir("test-skup")
-    os.chdir("python-2.7.7-docs-html")
+    os.chdir("python-2.7.7-docs-html\whatsnew")
     path = os.path.abspath("")
     print("Pocetna putanja je : {}".format(path))
     dictionary, graf = parsiraj_html(path)
@@ -66,6 +66,10 @@ if __name__ == "__main__":
                 lista_rangiranih_resultata = list(rang_rezultat.items())
                 sort(lista_rangiranih_resultata, 0, len(lista_rangiranih_resultata) - 1)
                 prikazi(lista_rangiranih_resultata)
+            else:
+                print("--" * 50)
+                print("Pretraga je neuspesna!")
+                print("--" * 50)
 
         elif userInput == "0":
                 running = False

@@ -14,23 +14,23 @@ def standardQuery(inDir, inWord):
             userInput = input("1 ili 0 --->  ")
             if userInput == "1":
                 logicalQuery(inDir, inWord)
-                return
+                return {}
             if userInput == "0":
-                return None
+                return {}
             elif (userInput != "0" and userInput != "1"):
                 print("Greska pri unosu...")
-                return None
+                return {}
         if (len(sub_str) == 1):                                             # 1 rec
             print("Rec je " + str(sub_str[0]))
             ispars, curr = newDictionary(sub_str[0].lower(), inDir)
             if (curr == 0):
-                return None
+                return {}
             return ispars
         if (len(sub_str) == 2 and (sub_str[0] != sub_str[1])):              # 2 reci
             ispars1, curr1 = newDictionary(sub_str[0].lower(), inDir)
             ispars2, curr2 = newDictionary(sub_str[1].lower(), inDir)
             if (curr1 == 0 or curr2 == 0):
-                return None
+                return {}
             finito = searchOR(ispars1, ispars2)
             return finito
         if (len(sub_str) == 3 and (sub_str[0] != sub_str[1] and sub_str[1] != sub_str[2] and sub_str[0] != sub_str[2])):
@@ -38,14 +38,15 @@ def standardQuery(inDir, inWord):
             ispars2, curr2 = newDictionary(sub_str[1].lower(), inDir)
             ispars3, curr3 = newDictionary(sub_str[2].lower(), inDir)
             if (curr1 == 0 or curr2 == 0 or curr3 == 0):
-                return None
+                return {}
             finito = searchStandardOR(ispars1, ispars2, ispars3)
             return finito
         else:
             print("Greska prilikom unosa...")
+            return {}
     else:
         print("Niste nista uneli!")
-        return None
+        return {}
 
 
 def logicalQuery(inDir, inWord):
@@ -57,21 +58,21 @@ def logicalQuery(inDir, inWord):
                 ispars1, curr1 = newDictionary(sub_str[0].lower(), inDir)
                 ispars2, curr2 = newDictionary(sub_str[2].lower(), inDir)
                 if (curr1 == 0 or curr2 == 0):
-                    return None
+                    return {}
                 finito = searchAND(ispars1, ispars2)
                 return finito
             elif (sub_str[1].lower() in logicalOperators[1]):       # OR
                 ispars1, curr1 = newDictionary(sub_str[0].lower(), inDir)
                 ispars2, curr2 = newDictionary(sub_str[2].lower(), inDir)
                 if (curr1 == 0 or curr2 == 0):
-                    return None
+                    return {}
                 finito = searchOR(ispars1, ispars2)
                 return finito
             elif (sub_str[1].lower() in logicalOperators[2]):       # NOT
                 ispars1, curr1 = newDictionary(sub_str[0].lower(), inDir)
                 ispars2, curr2 = newDictionary(sub_str[2].lower(), inDir)
                 if (curr1 == 0 or curr2 == 0):
-                    return None
+                    return {}
                 finito = searchNOT(ispars1, ispars2)
                 return finito
         elif (len(sub_str) == 1 or len(sub_str) > 1):                           # omoguceno prebacivanje na standardni upit
@@ -82,15 +83,15 @@ def logicalQuery(inDir, inWord):
             userInput = input("1 ili 0 --->  ")
             if userInput == "1":
                 standardQuery(inDir, inWord)
-                return
+                return {}
             if userInput == "0":
-                return None
+                return {}
             elif (userInput != "0" and userInput != "1"):
                 print("Greska pri unosu...")
-                return None
+                return {}
     else:
         print("Niste nista uneli!")
-        return None
+        return {}
 
 
 def searchAND(dict1, dict2):

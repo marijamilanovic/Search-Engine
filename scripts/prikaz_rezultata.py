@@ -16,7 +16,7 @@ def unos_broja_stranica_za_prikaz():
 
 def prikazi_rezultate(lista_rangiranih, broj_po_str):
     linkovi_po_stranici = broj_po_str
-    broj_stranice = (len(lista_rangiranih) // linkovi_po_stranici) - 1
+    broj_stranice = (len(lista_rangiranih) // linkovi_po_stranici) + 1
 
     trenutni = 0
     while True:

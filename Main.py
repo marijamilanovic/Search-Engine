@@ -1,7 +1,9 @@
 from time import time
 from scripts.Pretraga import *
 from scripts.Parsiranje import *
-
+from scripts.prikaz_rezultata import prikazi_rezultate, prikazi
+from scripts.rang import rang
+from scripts.sort import sort
 
 if __name__ == "__main__":
     running = True
@@ -11,7 +13,6 @@ if __name__ == "__main__":
 
     os.chdir("test-skup")
     os.chdir("python-2.7.7-docs-html")
-    #os.chdir("whatsnew")
     path = os.path.abspath("")
     print("Pocetna putanja je : {}".format(path))
     dictionary, graf = parsiraj_html(path)
@@ -41,20 +42,30 @@ if __name__ == "__main__":
 
         elif userInput == "2":
             if (dictionary == None):
-                print("Prvo morate PARSIRATI, pritisnite broj 1  ili 2 !!!")
+                print("Prvo morate PARSIRATI, pritisnite broj 1 !!!")
             else:
                 inSQ = str(input("Unesi rec ->  "))
                 standardQuery(dictionary, inSQ)
+                print(dictionary)
 
 
         elif userInput == "3":
             if (dictionary == None):
-                print("Prvo morate PARSIRATI, pritisnite broj 1  ili 2 !!!")
+                print("Prvo morate PARSIRATI, pritisnite broj 1 !!!")
             else:
                 inLQ = str(input("Unesi rec ->  "))
                 logicalQuery(dictionary, inLQ)
 
 
+        elif userInput == "4":
+            rec = input("Unesite rec:")
+            res = standardQuery(dictionary, rec)
+
+            if len(res) > 0:
+                rang_rezultat = rang(graf, res)
+                lista_rangiranih_resultata = list(rang_rezultat.items())
+                sort(lista_rangiranih_resultata, 0, len(lista_rangiranih_resultata) - 1)
+                prikazi(lista_rangiranih_resultata)
 
         elif userInput == "0":
                 running = False

@@ -6,8 +6,14 @@ class Set:
     def __iter__(self):
         return self.data.__iter__()
 
+    def __str__(self):
+        return str(self.data.keys())
+
     def add(self, element):
          self.data[element] = None
+
+    def remove(self, element):
+        del self.data[element]
 
     def union(self, *args):
         rezultat = Set()
@@ -24,11 +30,14 @@ class Set:
     def difference(self, s):
         rezultat = Set()
 
-        for key in s:
+        for key in self:
+            rezultat.add(key)
+        for n in s:
             try:
-                self.data[key]
+                self.data[n]
+                rezultat.remove(n)
             except KeyError:
-                rezultat.add(key)
+                pass
 
         return rezultat
 

@@ -12,3 +12,5 @@ class Graf(object):
         self._outgoing[u].append(v)
         self._incoming[v].append(u)
 
+    def incoming_links(self,v):
+        return self._incoming[v]

@@ -46,13 +46,13 @@ if __name__ == "__main__":
             else:
                 inSQ = str(input("Unesi rec ->  "))
                 standardQuery(dictionary, inSQ)
-                print(dictionary)
 
 
         elif userInput == "3":
             if (dictionary == None):
                 print("Prvo morate PARSIRATI, pritisnite broj 1 !!!")
             else:
+                print("FORMAT: rec operator rec")
                 inLQ = str(input("Unesi rec ->  "))
                 logicalQuery(dictionary, inLQ)
 
